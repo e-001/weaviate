@@ -103,7 +103,12 @@ func (m *OpenAIModule) initVectorizer(ctx context.Context,
 	logger logrus.FieldLogger,
 ) error {
 	apiKey := os.Getenv("OPENAI_APIKEY")
-	client := clients.New(apiKey, logger)
+	apiHost := os.Getenv("OPENAI_HOST")
+	if apiHost == "" {
+		apiHost = "https://api.openai.com"
+	}
+
+	client := clients.New(apiKey, apiHost, logger)
 
 	m.vectorizer = vectorizer.New(client)
 	m.metaProvider = client

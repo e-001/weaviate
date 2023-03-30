@@ -57,11 +57,11 @@ type vectorizer struct {
 	logger     logrus.FieldLogger
 }
 
-func New(apiKey string, logger logrus.FieldLogger) *vectorizer {
+func New(apiKey string, apiHost string, logger logrus.FieldLogger) *vectorizer {
 	return &vectorizer{
 		apiKey:     apiKey,
 		httpClient: &http.Client{},
-		host:       "https://api.openai.com",
+		host:       apiHost,
 		path:       "/v1/embeddings",
 		logger:     logger,
 	}
